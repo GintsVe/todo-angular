@@ -1,0 +1,80 @@
+<style >
+  * {
+    box-sizing: border-box;
+  }
+
+  .todo-wrapper {
+    max-width: 600px;
+    width: 100%;
+    margin: 0 auto;
+    border: 1px solid black ;
+    border-radius: 15px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px
+  }
+
+  .add-new-task {
+    display: flex;
+    gap: 5px;
+    justify-content: space-between;
+  }
+
+  .input {
+    width: 90%;
+    border: 1px solid black;
+    padding: 5px;
+    border-radius: 3px;
+  }
+
+  .button {
+    border: none;
+    color: white;
+    background-color: #5757ff;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+
+  .button:hover {
+    background-color: #3434fc;
+  }
+
+  .all-tasks {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+
+  .task-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    border-block: 1px solid #8f8f8f;
+    padding: 10px;
+  }
+
+  .task {
+    font-size: 18px;
+  }
+</style>
+
+
+<div class="todo-wrapper">
+  <div class="add-new-task">
+    <input placeholder="New task" maxlength="40" value="{{newTaskInput}}" class="input" type="text" (change)="changeTaskInput($event)">
+    <button class="button" (click)="addTask()">Add task</button>
+  </div>
+  <div class="all-tasks">
+    <div  *ngFor="let task of tasks; index as index">
+      <div class="task-wrapper" [style.background-color]="task.done ? 'rgba(76, 239, 76, 0.93)' : 'transparent'">
+        <span class="task">{{task.task}}</span>
+        <div class="task__menu">
+          <button class="button" (click)="taskDone(index)">Task done</button>
+          <button class="button" (click)="removeTask(index)">Remove Task</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
